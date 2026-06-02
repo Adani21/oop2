@@ -109,6 +109,23 @@ public class MyDodo extends Dodo
         pickUpGrain();
     }
 }
+    public void eggTrailToNest(){
+        while (!onNest()){
+        if (eggAhead() || nestAhead()){
+            move();
+            if(onEgg()){
+                pickUpEgg();
+            }
+        }
+        else{
+            while(!eggAhead() && !nestAhead()){
+            turnRight();
+        }
+            }
+           
+    }   
+    
+}
 
     public void walkAroundFencedArea() {
     while (!onEgg() && !borderAhead()) {
