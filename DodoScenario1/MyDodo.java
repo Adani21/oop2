@@ -157,6 +157,17 @@ public class MyDodo extends Dodo
          System.out.println("goedzo mimi");
     }
     
+    public void wisslenVanWaarde(){
+        int blauweEi =10;
+        int goudeEi =2;
+        int tijdelijkeEi =2;
+        
+        tijdelijkeEi = blauweEi;
+        blauweEi = goudeEi;
+        goudeEi = tijdelijkeEi;
+        
+        System.out.println("goude ei: "+ goudeEi + " blauwe ei: " + blauweEi);
+    }
     
     /**
      * Hatches the egg in the current cell by removing
