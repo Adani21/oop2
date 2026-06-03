@@ -152,6 +152,12 @@ public class MyDodo extends Dodo
         }
     }
     
+    public void findNestInMazecompliment(){
+         findNestInMaze();
+         System.out.println("goedzo mimi");
+    }
+    
+    
     /**
      * Hatches the egg in the current cell by removing
      * the egg from the cell.
