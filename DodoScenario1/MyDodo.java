@@ -139,6 +139,18 @@ public class MyDodo extends Dodo
     }
     turnRight();
 }
+
+    public void findNestInMaze(){
+        while(!onNest()){
+            if (fenceAhead()){
+                turnLeft();
+            }
+            else{
+                move();
+                turnRight();
+            }
+        }
+    }
     
     /**
      * Hatches the egg in the current cell by removing
