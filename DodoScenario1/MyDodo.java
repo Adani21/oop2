@@ -51,6 +51,11 @@ public class MyDodo extends Dodo
     public void mimiRight(){
         turnRight();
     }
+    public void faceEast(){
+        if (getDirection() != EAST) {
+            setDirection(EAST);
+        }
+    }
 
     public void turn180(){
         turnRight();
