@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Arrays;
 
 /**
  *
@@ -215,6 +216,57 @@ public class MyDodo extends Dodo
             nrStepsTaken++;                 // increment the counter
             System.out.println("moved " + nrStepsTaken);
         }
+    }
+    public int[] calculateDistance(int currentX, int currentY, int correctX, int correctY){
+           int[] distance = {currentX - correctX, currentY - correctY};
+
+           return distance;
+            
+    }
+    public boolean validCoord(int coordX, int coordY){
+        int maxX = getWorld().getWidth();
+        int maxY = getWorld().getHeight();
+        if(coordX < 0 || coordY < 0){
+            showError("invalide coordinatenw"); 
+            return false;
+        }
+        if(coordX > maxX || coordY > maxY){
+            showError("invalide coordinatenw"); 
+            return false;
+        }
+        return true;
+    }
+    public void goToLocation(int coordX, int coordY){
+        int currentX = getX();
+        int currentY = getY();
+        
+        int correctX = coordX;
+        int correctY = coordY;
+        
+        if(!validCoord(coordX,coordY)){
+        return;
+        }
+        while(getX() < coordX){
+            setDirection(EAST);
+            move();
+            
+        }
+        while(getX() > coordX){
+            setDirection(WEST);
+            move();
+            
+        }
+        while(getY() < coordY){
+            setDirection(SOUTH);
+            move();
+            
+        }
+        while(getY() > coordY){
+            setDirection(NORTH);
+            move();
+            
+        }
+    
     }
     
     public void gotoEgg() {
