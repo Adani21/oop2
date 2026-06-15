@@ -1,0 +1,253 @@
+[33mcommit 0beea74a6fde6b5a5caba4f7b058ebbd868863d5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Adani21 <1221315@student.roc-nijmegen.nl>
+Date:   Fri Jun 12 10:53:53 2026 +0200
+
+    calculatedistance(), validCoord(), gotToLocation() methode aangemaakt
+    
+    voor opdracht goToLocation(int x, int y) en validCoordinates(int x, int y)
+
+[1mdiff --git a/DodoScenario1/Mauritius.class b/DodoScenario1/Mauritius.class[m
+[1mindex 10d1c96..d621cb4 100644[m
+Binary files a/DodoScenario1/Mauritius.class and b/DodoScenario1/Mauritius.class differ
+[1mdiff --git a/DodoScenario1/Mauritius.java b/DodoScenario1/Mauritius.java[m
+[1mindex aecb35e..21d5cf1 100644[m
+[1m--- a/DodoScenario1/Mauritius.java[m
+[1m+++ b/DodoScenario1/Mauritius.java[m
+[36m@@ -16,7 +16,7 @@[m [mimport javax.swing.filechooser.FileNameExtensionFilter;[m
+  */[m
+ public class Mauritius extends World[m
+ {[m
+[31m-    private static final String WORLD_NAME = "worldMazeLevel2b.txt";[m
+[32m+[m[32m    private static final String WORLD_NAME = "worldOneDodo.txt";[m
+     private static File WORLD_FILE = null;[m
+ [m
+     private static final int MAXWIDTH = 10, MAXHEIGHT = 10, CELLSIZE = 60;[m
+[1mdiff --git a/DodoScenario1/MyDodo.class b/DodoScenario1/MyDodo.class[m
+[1mindex a062d64..5030da8 100644[m
+Binary files a/DodoScenario1/MyDodo.class and b/DodoScenario1/MyDodo.class differ
+[1mdiff --git a/DodoScenario1/MyDodo.ctxt b/DodoScenario1/MyDodo.ctxt[m
+[1mindex eac8a4d..f3c6ba1 100644[m
+[1m--- a/DodoScenario1/MyDodo.ctxt[m
+[1m+++ b/DodoScenario1/MyDodo.ctxt[m
+[36m@@ -28,20 +28,26 @@[m [mcomment19.target=void\ jump(int)[m
+ comment19.text=\r\n\ Move\ given\ number\ of\ cells\ forward\ in\ the\ current\ direction.\r\n\ \r\n\ <p>\ Initial\:\ \ \ \r\n\ <p>\ Final\:\ \ \r\n\ \r\n\ @param\ \ \ int\ distance\:\ the\ number\ of\ steps\ made\r\n[m
+ comment2.params=[m
+ comment2.target=void\ act()[m
+[31m-comment20.params=[m
+[31m-comment20.target=void\ gotoEgg()[m
+[31m-comment21.params=[m
+[31m-comment21.target=void\ goBackToStartOfRowAndFaceBack()[m
+[31m-comment22.params=[m
+[31m-comment22.target=void\ walkToWorldEdgeClimbingOverFences()[m
+[32m+[m[32mcomment20.params=currentX\ currentY\ correctX\ correctY[m
+[32m+[m[32mcomment20.target=int[]\ calculateDistance(int,\ int,\ int,\ int)[m
+[32m+[m[32mcomment21.params=coordX\ coordY[m
+[32m+[m[32mcomment21.target=boolean\ validCoord(int,\ int)[m
+[32m+[m[32mcomment22.params=coordX\ coordY[m
+[32m+[m[32mcomment22.target=void\ goToLocation(int,\ int)[m
+ comment23.params=[m
+[31m-comment23.target=boolean\ grainAhead()[m
+[32m+[m[32mcomment23.target=void\ gotoEgg()[m
+ comment24.params=[m
+[31m-comment24.target=void\ walkToWorldEdge()[m
+[31m-comment24.text=\r\n\ Walks\ to\ edge\ of\ the\ world\ printing\ the\ coordinates\ at\ each\ step\r\n\ \r\n\ <p>\ Initial\:\ Dodo\ is\ on\ West\ side\ of\ world\ facing\ East.\r\n\ <p>\ Final\:\ \ \ Dodo\ is\ on\ East\ side\ of\ world\ facing\ East.\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ Coordinates\ of\ each\ cell\ printed\ in\ the\ console.\r\n[m
+[32m+[m[32mcomment24.target=void\ goBackToStartOfRowAndFaceBack()[m
+ comment25.params=[m
+[31m-comment25.target=boolean\ canLayEgg()[m
+[31m-comment25.text=\r\n\ Test\ if\ Dodo\ can\ lay\ an\ egg.\r\n\ \ \ \ \ \ \ \ \ \ (there\ is\ not\ already\ an\ egg\ in\ the\ cell)\r\n\ \r\n\ <p>\ Initial\:\ Dodo\ is\ somewhere\ in\ the\ world\r\n\ <p>\ Final\:\ \ \ Same\ as\ initial\ situation\r\n\ \r\n\ @return\ boolean\ true\ if\ Dodo\ can\ lay\ an\ egg\ (no\ egg\ there)\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ false\ if\ Dodo\ can't\ lay\ an\ egg\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (already\ an\ egg\ in\ the\ cell)\r\n[m
+[32m+[m[32mcomment25.target=void\ walkToWorldEdgeClimbingOverFences()[m
+[32m+[m[32mcomment26.params=[m
+[32m+[m[32mcomment26.target=boolean\ grainAhead()[m
+[32m+[m[32mcomment27.params=[m
+[32m+[m[32mcomment27.target=void\ walkToWorldEdge()[m
+[32m+[m[32mcomment27.text=\r\n\ Walks\ to\ edge\ of\ the\ world\ printing\ the\ coordinates\ at\ each\ step\r\n\ \r\n\ <p>\ Initial\:\ Dodo\ is\ on\ West\ side\ of\ world\ facing\ East.\r\n\ <p>\ Final\:\ \ \ Dodo\ is\ on\ East\ side\ of\ world\ facing\ East.\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ Coordinates\ of\ each\ cell\ printed\ in\ the\ console.\r\n[m
+[32m+[m[32mcomment28.params=[m
+[32m+[m[32mcomment28.target=boolean\ canLayEgg()[m
+[32m+[m[32mcomment28.text=\r\n\ Test\ if\ Dodo\ can\ lay\ an\ egg.\r\n\ \ \ \ \ \ \ \ \ \ (there\ is\ not\ already\ an\ egg\ in\ the\ cell)\r\n\ \r\n\ <p>\ Initial\:\ Dodo\ is\ somewhere\ in\ the\ world\r\n\ <p>\ Final\:\ \ \ Same\ as\ initial\ situation\r\n\ \r\n\ @return\ boolean\ true\ if\ Dodo\ can\ lay\ an\ egg\ (no\ egg\ there)\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ false\ if\ Dodo\ can't\ lay\ an\ egg\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (already\ an\ egg\ in\ the\ cell)\r\n[m
+ comment3.params=[m
+ comment3.target=void\ move()[m
+ comment3.text=\r\n\ Move\ one\ cell\ forward\ in\ the\ current\ direction.\r\n\ \r\n\ <P>\ Initial\:\ Dodo\ is\ somewhere\ in\ the\ world\r\n\ <P>\ Final\:\ If\ possible,\ Dodo\ has\ moved\ forward\ one\ cell\r\n\r\n[m
+[36m@@ -58,4 +64,4 @@[m [mcomment8.params=[m
+ comment8.target=void\ climbOverFence()[m
+ comment9.params=[m
+ comment9.target=void\ stepOneCellBackwards()[m
+[31m-numComments=26[m
+[32m+[m[32mnumComments=29[m
+[1mdiff --git a/DodoScenario1/MyDodo.java b/DodoScenario1/MyDodo.java[m
+[1mindex 64e6da3..038615e 100644[m
+[1m--- a/DodoScenario1/MyDodo.java[m
+[1m+++ b/DodoScenario1/MyDodo.java[m
+[36m@@ -1,4 +1,5 @@[m
+ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)[m
+[32m+[m[32mimport java.util.Arrays;[m
+ [m
+ /**[m
+  *[m
+[36m@@ -216,6 +217,57 @@[m [mpublic class MyDodo extends Dodo[m
+             System.out.println("moved " + nrStepsTaken);[m
+         }[m
+     }[m
+[32m+[m[32m    public int[] calculateDistance(int currentX, int currentY, int correctX, int correctY){[m
+[32m+[m[32m           int[] distance = {currentX - correctX, currentY - correctY};[m
+[32m+[m
+[32m+[m[32m           return distance;[m
+[32m+[m[41m            [m
+[32m+[m[32m    }[m
+[32m+[m[32m    public boolean validCoord(int coordX, int coordY){[m
+[32m+[m[32m        int maxX = getWorld().getWidth();[m
+[32m+[m[32m        int maxY = getWorld().getHeight();[m
+[32m+[m[32m        if(coordX < 0 || coordY < 0){[m
+[32m+[m[32m            showError("invalide coordinatenw");[m[41m [m
+[32m+[m[32m            return false;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        if(coordX > maxX || coordY > maxY){[m
+[32m+[m[32m            showError("invalide coordinatenw");[m[41m [m
+[32m+[m[32m            return false;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    }[m
+[32m+[m[32m    public void goToLocation(int coordX, int coordY){[m
+[32m+[m[32m        int currentX = getX();[m
+[32m+[m[32m        int currentY = getY();[m
+[32m+[m[41m        [m
+[32m+[m[32m        int correctX = coordX;[m
+[32m+[m[32m        int correctY = coordY;[m
+[32m+[m[41m        [m
+[32m+[m[32m        if(!validCoord(coordX,coordY)){[m
+[32m+[m[32m        return;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        while(getX() < coordX){[m
+[32m+[m[32m            setDirection(EAST);[m
+[32m+[m[32m            move();[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m
+[32m+[m[32m        while(getX() > coordX){[m
+[32m+[m[32m            setDirection(WEST);[m
+[32m+[m[32m            move();[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m
+[32m+[m[32m        while(getY() < coordY){[m
+[32m+[m[32m            setDirection(SOUTH);[m
+[32m+[m[32m            move();[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m
+[32m+[m[32m        while(getY() > coordY){[m
+[32m+[m[32m            setDirection(NORTH);[m
+[32m+[m[32m            move();[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m
+[32m+[m[41m    [m
+[32m+[m[32m    }[m
+     [m
+     public void gotoEgg() {[m
+     while (!onEgg()) {[m
+[1mdiff --git a/DodoScenario1/hs_err_pid13588.log b/DodoScenario1/hs_err_pid13588.log[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0281f9a[m
+[1m--- /dev/null[m
+[1m+++ b/DodoScenario1/hs_err_pid13588.log[m
+[36m@@ -0,0 +1,981 @@[m
+[32m+[m[32m#[m
+[32m+[m[32m# A fatal error has been detected by the Java Runtime Environment:[m
+[32m+[m[32m#[m
+[32m+[m[32m#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffb6851b5c6, pid=13588, tid=6796[m
+[32m+[m[32m#[m
+[32m+[m[32m# JRE version: OpenJDK Runtime Environment Temurin-21.0.4+7 (21.0.4+7) (build 21.0.4+7-LTS)[m
+[32m+[m[32m# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.4+7 (21.0.4+7-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)[m
+[32m+[m[32m# Problematic frame:[m
+[32m+[m[32m# C  [awt.dll+0xdb5c6][m
+[32m+[m[32m#[m
+[32m+[m[32m# No core dump will be written. Minidumps are not enabled by default on client versions of Windows[m
+[32m+[m[32m#[m
+[32m+[m[32m# If you would like to submit a bug report, please visit:[m
+[32m+[m[32m#   https://github.com/adoptium/adoptium-support/issues[m
+[32m+[m[32m# The crash happened outside the Java Virtual Machine in native code.[m
+[32m+[m[32m# See problematic frame for where to report the bug.[m
+[32m+[m[32m#[m
+[32m+[m
+[32m+[m[32m---------------  S U M M A R Y ------------[m
+[32m+[m
+[32m+[m[32mCommand Line: -XX:MaxGCPauseMillis=50 -agentlib:jdwp=transport=dt_shmem,address=javadebug -Dfile.encoding=UTF-8 bluej.runtime.ExecServer UTF-8[m
+[32m+[m
+[32m+[m[32mHost: 13th Gen Intel(R) Core(TM) i7-1355U, 12 cores, 15G,  Windows 11 , 64 bit Build 26100 (10.0.26100.8521)[m
+[32m+[m[32mTime: Fri Jun 12 09:54:56 2026 W. Europe Daylight Time elapsed time: 213.855193 seconds (0d 0h 3m 33s)[m
+[32m+[m
+[32m+[m[32m---------------  T H R E A D  ---------------[m
+[32m+[m
+[32m+[m[32mCurrent thread (0x000001a2f6134ca0):  JavaThread "AWT-EventQueue-0"        [_thread_in_native, id=6796, stack(0x0000005ed1500000,0x0000005ed1600000) (1024K)][m
+[32m+[m
+[32m+[m[32mStack: [0x0000005ed1500000,0x0000005ed1600000],  sp=0x0000005ed15feb80,  free space=1018k[m
+[32m+[m[32mNative frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)[m
+[32m+[m[32mC  [awt.dll+0xdb5c6][m
+[32m+[m
+[32m+[m[32mJava frames: (J=compiled Java code, j=interpreted, Vv=VM code)[m
+[32m+[m[32mj  sun.awt.Win32GraphicsDevice.initNativeScale(I)V+0 java.desktop@21.0.4[m
+[32m+[m[32mj  sun.awt.Win32GraphicsDevice.initScaleFactors()V+60 java.desktop@21.0.4[m
+[32m+[m[32mj  sun.awt.Win32GraphicsDevice.displayChanged()V+16 java.desktop@21.0.4[m
+[32m+[m[32mj  sun.awt.Win32GraphicsEnvironment.displayChanged()V+271 java.desktop@21.0.4[m
+[32m+[m[32mj  sun.awt.windows.WToolkit.lambda$displayChanged$4()V+15 java.desktop@21.0.4[m
+[32m+[m[32mj  sun.awt.windows.WToolkit$$Lambda+0x000001a281037778.run()V+0 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.event.InvocationEvent.dispatch()V+47 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventQueue.dispatchEventImpl(Ljava/awt/AWTEvent;Ljava/lang/Object;)V+21 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventQueue$4.run()Ljava/lang/Void;+32 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventQueue$4.run()Ljava/lang/Object;+1 java.desktop@21.0.4[m
+[32m+[m[32mJ 889 c1 java.security.AccessController.executePrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/lang/Class;)Ljava/lang/Object; java.base@21.0.4 (65 bytes) @ 0x000001a2da75ec54 [0x000001a2da75eae0+0x0000000000000174][m
+[32m+[m[32mj  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;+13 java.base@21.0.4[m
+[32m+[m[32mj  java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;Ljava/security/AccessControlContext;)Ljava/lang/Object;+18 java.base@21.0.4[m
+[32m+[m[32mj  java.awt.EventQueue.dispatchEvent(Ljava/awt/AWTEvent;)V+46 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventDispatchThread.pumpOneEventForFilters(I)V+81 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventDispatchThread.pumpEventsForFilter(ILjava/awt/Conditional;Ljava/awt/EventFilter;)V+35 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V+11 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V+4 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V+3 java.desktop@21.0.4[m
+[32m+[m[32mj  java.awt.EventDispatchThread.run()V+9 java.desktop@21.0.4[m
+[32m+[m[32mv  ~StubRoutines::call_stub 0x000001a2e1b3100d[m
+[32m+[m
+[32m+[m[32msiginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0x00000000435b5bab[m
+[32m+[m
+[32m+[m
+[32m+[m[32mRegisters:[m
+[32m+[m[32mRAX=0x00000000435b5b5b, RBX=0x000001a2f785dbc0, RCX=0x00000000435b5b5b, RDX=0x0000000000000000[m
+[32m+[m[32mRSP=0x0000005ed15feb80, RBP=0x0000005ed15fec60, RSI=0x0000000707b77848, RDI=0x0000000000000000[m
+[32m+[m[32mR8 =0x0000000000000001, R9 =0x0000005ed111e000, R10=0x000001a2e1b40787, R11=0x0000000000000100[m
+[32m+[m[32mR12=0x0000000000000000, R13=0x000001a2f23bae90, R14=0x0000005ed15fec88, R15=0x000001a2f6134ca0[m
+[32m+[m[32mRIP=0x00007ffb6851b5c6, EFLAGS=0x0000000000010202[m
+[32m+[m
+[32m+[m
+[32m+[m[32mRegister to memory mapping:[m
+[32m+[m
+[32m+[m[32mRAX=0x00000000435b5b5b is an unknown value[m
+[32m+[m[32mRBX=0x000001a2f785dbc0 points into unknown readable memory: 0x000001a2f7aa45c0 | c0 45 aa f7 a2 01 00 00[m
+[32m+[m[32mRCX=0x00000000435b5b5b is an unknown value[m
+[32m+[m[32mRDX=0x0 is null[m
+[32m+[m[32mRSP=0x0000005ed15feb80 is pointing into the stack for thread: 0x000001a2f6134ca0[m
+[32m+[m[32mRBP=0x0000005ed15fec60 is pointing into the stack for thread: 0x000001a2f6134ca0[m
+[32m+[m[32mRSI=0x0000000707b77848 is pointing into object: [Ljava.lang.Object;[m[41m [m
+[32m+[m[32m{0x0000000707b77838} - klass: 'java/lang/Object'[][m
+[32m+[m[32m - length: 10[m
+[32m+[m[32mRDI=0x0 is null[m
+[32m+[m[32mR8 =0x0000000000000001 is an unknown value[m
+[32m+[m[32mR9 =0x0000005ed111e000 points into unknown readable memory: 0x0000000000000000 | 00 00 00 00 00 00 00 00[m
+[32m+[m[32mR10=0x000001a2e1b40787 is at code_begin+1927 in an Interpreter codelet[m
+[32m+[m[32mnative method entry point (kind = native)  [0x000001a2e1b40000, 0x000001a2e1b41238]  4664 bytes[m
+[32m+[m[32mR11=0x0000000000000100 is an unknown value[m
+[32m+[m[32mR12=0x0 is null[m
+[32m+[m[32mR13={method} {0x000001a2f23bae98} 'initNativeScale' '(I)V' in 'sun/awt/Win32GraphicsDevice'[m
+[32m+[m[32mR14=0x0000005ed15fec88 is pointing into the stack for thread: 0x000001a2f6134ca0[m
+[32m+[m[32mR15=0x000001a2f6134ca0 is a thread[m
+[32m+[m
+[32m+[m[32mTop of Stack: (sp=0x0000005ed15feb80)[m
+[32m+[m[32m0x0000005ed15feb80:   000001a2f785dbc0 000001a2f14e4600[m
+[32m+[m[32m0x0000005ed15feb90:   000001a2f27ad5c0 000001a2f785dbc0[m
+[32m+[m[32m0x0000005ed15feba0:   000001a2f785dbc0 00007ffb6851ce02[m
+[32m+[m[32m0x0000005ed15febb0:   00007ffb6857a848 000001a2f23bae90[m
+[32m+[m[32m0x0000005ed15febc0:   000001a2f14ddf10 000000000000000d[m
+[32m+[m[32m0x0000005ed15febd0:   000001a2e1b396b9 000001a2e1b407b6[m
+[32m+[m[32m0x0000005ed15febe0:   000001a2f23bae90 000001a2f6134ca0[m
+[32m+[m[32m0x0000005ed15febf0:   000001a2f6134ca0 000001a2e1b396b9[m
+[32m+[m[32m0x0000005ed15fec00:   0000000707b77848 00007ffb67a40379[m
+[32m+[m[32m0x0000005ed15fec10:   0000005ed15fed50 0000005ed15fec18[m
+[32m+[m[32m0x0000005ed15fec20:   0000000000000000 0000000000000005[m
+[32m+[m[32m0x0000005ed15fec30:   000001a2f23bdec8 0000000000000000[m
+[32m+[m[32m0x0000005ed15fec40:   0000000704f1f200 000001a2f23bae90[m
+[3

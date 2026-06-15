@@ -84,6 +84,28 @@ public class MyDodo extends Dodo
     }
 }
 
+public void countEggsInRow(){
+        int oldX = getX();
+        int oldY = getY();
+        int oldDir = getDirection();
+        int eggCounter = 0;
+        
+        goBackToStartOfRowAndFaceBack();
+
+        while(!borderAhead()){
+            if (onEgg()){
+                eggCounter++;
+            
+        }
+        move();
+        
+        }
+        
+        goToLocation(oldX, oldY);
+        setDirection(oldDir);
+        
+        showCompliment("Totaal aantal eieren: " + eggCounter);
+}
     public void stepOneCellBackwards(){
         turn180();
         move();
