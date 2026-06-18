@@ -106,6 +106,21 @@ public void countEggsInRow(){
         
         showCompliment("Totaal aantal eieren: " + eggCounter);
 }
+public int countEggsInRowV2(){
+    int eggCounter = 0;
+
+    goBackToStartOfRowAndFaceBack();
+
+    while(!borderAhead()){
+        if (onEgg()){
+            eggCounter++;
+        }
+        move();
+    }
+
+    return eggCounter;
+}
+
     public void stepOneCellBackwards(){
         turn180();
         move();
@@ -122,7 +137,24 @@ public void countEggsInRow(){
         layEgg();
         
     }
-    
+    public void countEggsInWorld()  {
+    int aantalRijen = getWorld().getHeight(); 
+    int totaalAantalEieren = 0;
+    int huidigeRij = 0;
+
+    while (huidigeRij < aantalRijen) {
+        goToLocation(0, huidigeRij);
+        setDirection(EAST); 
+        
+        totaalAantalEieren = totaalAantalEieren + countEggsInRowV2(); 
+        
+        huidigeRij++;
+    }
+
+    goToLocation(0, 0);
+    System.out.println("Totaal aantal eieren: " + totaalAantalEieren);
+}
+
     public void walkToEdgeAndLayEggOnNest(){
         while (!borderAhead()) {
         if (onNest() && canLayEgg()) {
