@@ -112,6 +112,17 @@ public void countEggsInRow(){
         turn180();
     }
 
+    public void layTrailEgg(int distance){
+        int nrStepsTaken = 1;             
+        while ( nrStepsTaken < distance ) {  
+            layEgg();
+            move(); 
+            nrStepsTaken++;                 
+        }
+        layEgg();
+        
+    }
+    
     public void walkToEdgeAndLayEggOnNest(){
         while (!borderAhead()) {
         if (onNest() && canLayEgg()) {
