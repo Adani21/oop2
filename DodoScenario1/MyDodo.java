@@ -191,26 +191,52 @@ public void mostEggInRow() {
         }
     }
     public void buildMonument() {
+    int startY = getY();
+    int startX = getX();
     int aantalRijen = getWorld().getHeight();
-    int huidigeRij = 0;
+    int huidigeRij = startY;
 
-    while (huidigeRij < aantalRijen) {
-        goToLocation(0, huidigeRij);
+    while (huidigeRij < aantalRijen && !borderAhead()) {
+        goToLocation(startX, huidigeRij);
         setDirection(EAST);
 
-        int eierenNodig = huidigeRij + 1;
-        int eierenGeleagd = 0;
+        int eierenNodig = (huidigeRij - startY) + 1;
+        int eierenGelegd = 0;
 
-        while (eierenGeleagd < eierenNodig) {
+        while (eierenGelegd < eierenNodig) {
             layEgg();
             move();
-            eierenGeleagd++;
+            eierenGelegd++;
         }
 
         huidigeRij++;
     }
+    layEgg();
+}
+public void buildStrongMonument(){
+    int startX = getX();
+    int startY = getY();
+    int aantalRijen = getWorld().getHeight();
+    int huidigeRij = startY;
     
-    goToLocation(0, 0);
+    int eierenNodig = 1; 
+
+    while (huidigeRij < aantalRijen&& !borderAhead()) {
+        goToLocation(startX, huidigeRij);
+        setDirection(EAST);
+
+        int eierenGelegd = 0;
+
+        while (eierenGelegd < eierenNodig) {
+            layEgg();
+            move();
+            eierenGelegd++;
+        }
+        
+        eierenNodig = eierenNodig * 2; 
+        huidigeRij++;
+    }
+    layEgg();
 }
     public void pickupGrainAndPrintCoordinates() {
     while (!borderAhead()) {
