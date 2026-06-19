@@ -154,6 +154,30 @@ public int countEggsInRowV2(){
     goToLocation(0, 0);
     System.out.println("Totaal aantal eieren: " + totaalAantalEieren);
 }
+public void mostEggInRow() {
+    int aantalRijen = getWorld().getHeight(); 
+    
+    int meesteEieren = -1; 
+    int rijMetMeesteEieren = 0;
+    int huidigeRij = 0; 
+
+    while (huidigeRij < aantalRijen) {
+        goToLocation(0, huidigeRij);
+        setDirection(EAST); 
+        
+        int eierenInDezeRij = countEggsInRowV2(); 
+        
+        if (eierenInDezeRij > meesteEieren) {
+            meesteEieren = eierenInDezeRij;
+            rijMetMeesteEieren = huidigeRij;
+        }
+        
+        huidigeRij++;
+    }
+
+    goToLocation(0, 0);
+    System.out.println("De rij met de meeste eieren is rij: " + rijMetMeesteEieren);
+}
 
     public void walkToEdgeAndLayEggOnNest(){
         while (!borderAhead()) {
