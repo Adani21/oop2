@@ -213,6 +213,23 @@ public void mostEggInRow() {
     }
     layEgg();
 }
+public void buildPyramid() {
+        int startX = getX();
+        int startY = getY();
+        int row = startY;
+        while (row < getWorld().getHeight()) {
+            int offset = row - startY;
+            int startColumn = startX - offset;
+            int endColumn = startX + offset;
+            if (startColumn < 0 || endColumn >= getWorld().getWidth()) {
+                break;
+            }
+            goToLocation(startColumn, row);
+            setDirection(EAST);
+            layTrailEgg(2 * offset + 1);
+            row++;
+        }
+    }
 public void buildStrongMonument(){
     int startX = getX();
     int startY = getY();
@@ -364,7 +381,7 @@ public void buildStrongMonument(){
         int maxX = getWorld().getWidth();
         int maxY = getWorld().getHeight();
         if(coordX < 0 || coordY < 0){
-            showError("invalide coordinatenw"); 
+            showError("invalide coordinaten"); 
             return false;
         }
         if(coordX > maxX || coordY > maxY){
