@@ -190,6 +190,28 @@ public void mostEggInRow() {
             layEgg();
         }
     }
+    public void buildMonument() {
+    int aantalRijen = getWorld().getHeight();
+    int huidigeRij = 0;
+
+    while (huidigeRij < aantalRijen) {
+        goToLocation(0, huidigeRij);
+        setDirection(EAST);
+
+        int eierenNodig = huidigeRij + 1;
+        int eierenGeleagd = 0;
+
+        while (eierenGeleagd < eierenNodig) {
+            layEgg();
+            move();
+            eierenGeleagd++;
+        }
+
+        huidigeRij++;
+    }
+    
+    goToLocation(0, 0);
+}
     public void pickupGrainAndPrintCoordinates() {
     while (!borderAhead()) {
         if (onGrain()) {
