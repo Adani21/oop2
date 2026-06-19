@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Arrays;
 
 /**
@@ -121,6 +121,11 @@ public int countEggsInRowV2(){
     return eggCounter;
 }
 
+    public double averageInRow(){
+     double totalEgg = countEggsInWorld();
+     return totalEgg / getWorld().getHeight();
+    }
+
     public void stepOneCellBackwards(){
         turn180();
         move();
@@ -137,7 +142,7 @@ public int countEggsInRowV2(){
         layEgg();
         
     }
-    public void countEggsInWorld()  {
+    public double countEggsInWorld()  {
     int aantalRijen = getWorld().getHeight(); 
     int totaalAantalEieren = 0;
     int huidigeRij = 0;
@@ -152,7 +157,7 @@ public int countEggsInRowV2(){
     }
 
     goToLocation(0, 0);
-    System.out.println("Totaal aantal eieren: " + totaalAantalEieren);
+    return totaalAantalEieren;
 }
 public void mostEggInRow() {
     int aantalRijen = getWorld().getHeight(); 
