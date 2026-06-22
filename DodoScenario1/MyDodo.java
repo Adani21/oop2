@@ -15,9 +15,6 @@ public class MyDodo extends Dodo
         myNrOfEggsHatched = 0;
     }
 
-    public void act() {
-    }
-
     /**
      * Move one cell forward in the current direction.
      * 
@@ -84,6 +81,21 @@ public class MyDodo extends Dodo
     }
 }
 
+public void moveRandomly() {
+    int myNrOfStepsTaken = 0;
+    
+    while (myNrOfStepsTaken < Mauritius.MAXSTEPS) {
+        setDirection(randomDirection());
+        
+        while (!borderAhead() && !fenceAhead()) {
+            setDirection(randomDirection());
+        
+        
+        move();
+        myNrOfStepsTaken++;
+    }
+    }
+}
 public void countEggsInRow(){
         int oldX = getX();
         int oldY = getY();
