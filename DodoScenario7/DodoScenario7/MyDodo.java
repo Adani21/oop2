@@ -12,7 +12,9 @@ public class MyDodo extends Dodo
 {
     /* ATTRIBUTE DECLARATIONS: */
     private int myNrOfStepsTaken;
-           
+    private int myNrOfEggsHatched;
+    private int myScore;
+    
     public MyDodo() {
         super( EAST );
         /* INITIALISATION OF ATTRIBUTES: */
@@ -99,8 +101,6 @@ public class MyDodo extends Dodo
     public void practiceWithListsOfSurpriseEgss( ){
         List<SurpriseEgg>  listOfEgss = SurpriseEgg.generateListOfSurpriseEggs( 12, getWorld() );
     }
-
-    private int myNrOfEggsHatched;
     
     public void mimiRight(){
         turnRight();
@@ -565,4 +565,30 @@ public void buildStrongMonument(){
             return true;
     }
     }  
+    
+  public void pickupNearestEggInList() {
+    List<Egg> eggs = getListOfEggsInWorld();
+    
+    Egg nearestEgg = eggs.get(0);
+    
+    int eiTeller = 0;
+    while (eiTeller < eggs.size()) {
+        Egg currentEgg = eggs.get(eiTeller);
+        
+        int huidigeAfstand = Math.abs(currentEgg.getX() - getX()) + Math.abs(currentEgg.getY() - getY());
+        int kortsteAfstand = Math.abs(nearestEgg.getX() - getX()) + Math.abs(nearestEgg.getY() - getY());
+        
+        if (huidigeAfstand < kortsteAfstand) {
+            nearestEgg = currentEgg;
+        }
+        
+        eiTeller++;
+    }
+    
+    goToLocation(nearestEgg.getX(), nearestEgg.getY());
+    
+    if (onEgg()) {
+        pickUpEgg();
+    }
+}
 }
