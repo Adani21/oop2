@@ -33,13 +33,18 @@ public class MyDodo extends Dodo
      * <P> Final: If possible, Dodo has moved forward one cell
      *
      */
-    public void move() {
-        if ( canMove() ) {
-            step();
-        } else {
-            showError( "I'm stuck!" );
+   public void move() {
+    if ( myNrOfStepsTaken > 0 && canMove() ) {
+        step();
+        myNrOfStepsTaken--;
+        
+        if (!getWorld().getObjects(Scoreboard.class).isEmpty()) {
+            Scoreboard sb = (Scoreboard) getWorld().getObjects(Scoreboard.class).get(0);
+            sb.getScore(myNrOfStepsTaken, myScore); 
         }
-    }
+    } 
+}
+
 
     /**
      * Test if Dodo can move forward, 
@@ -116,7 +121,7 @@ public class MyDodo extends Dodo
         turnRight();
     }
        public void climbOverFence() {
-    if (getDirection() == EAST) {        // kijkt naar rechts
+    if (getDirection() == EAST) {        
         turnLeft();
         move();
         turnRight();
@@ -125,7 +130,7 @@ public class MyDodo extends Dodo
         turnRight();
         move();
         turnLeft();
-    } else if (getDirection() == WEST) { // kijkt naar links
+    } else if (getDirection() == WEST) { 
         turnRight();
         move();
         turnLeft();
@@ -519,7 +524,7 @@ public void buildStrongMonument(){
     }
 
     public boolean grainAhead() {
-    move();                  // stap vooruit
+    move();           
     
     if (onGrain()) {
         stepOneCellBackwards();
@@ -566,7 +571,7 @@ public void buildStrongMonument(){
     }
     }  
     
-  public void pickupNearestEggInList() {
+ public void pickupNearestEggInList() {
     List<Egg> eggs = getListOfEggsInWorld();
     
     Egg nearestEgg = eggs.get(0);
@@ -591,4 +596,52 @@ public void buildStrongMonument(){
         pickUpEgg();
     }
 }
+public void dodoRace() {
+    myNrOfStepsTaken = Mauritius.MAXSTEPS;     
+    
+    while (myNrOfStepsTaken > 0) {
+        List<Egg> eggs = getListOfEggsInWorld();
+        
+        if (eggs.isEmpty()) {
+            break;
+        }
+        
+        Egg dichtstbijzijndeEi = eggs.get(0);
+        int kortsteAfstand = Math.abs(dichtstbijzijndeEi.getX() - getX()) + Math.abs(dichtstbijzijndeEi.getY() - getY());
+        
+        int i = 1;
+        while (i < eggs.size()) {
+            Egg checkEi = eggs.get(i);
+            int afstand = Math.abs(checkEi.getX() - getX()) + Math.abs(checkEi.getY() - getY());
+            
+            if (afstand < kortsteAfstand) {
+                kortsteAfstand = afstand;
+                dichtstbijzijndeEi = checkEi;
+            }
+            i++;
+        }
+        
+        if (kortsteAfstand > myNrOfStepsTaken) {
+            break;
+        }
+        
+        goToLocation(dichtstbijzijndeEi.getX(), dichtstbijzijndeEi.getY());
+        
+        if (onEgg()) {
+            pickUpEgg();
+            
+            if (dichtstbijzijndeEi.getClass() == GoldenEgg.class) {
+                myScore += 5;
+            } else {
+                myScore += 1;
+            }
+            
+            if (!getWorld().getObjects(Scoreboard.class).isEmpty()) {
+                Scoreboard sb = (Scoreboard) getWorld().getObjects(Scoreboard.class).get(0);
+                sb.getScore(myNrOfStepsTaken, myScore);
+            }
+        }
+    }
 }
+}
+    
